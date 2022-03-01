@@ -1,28 +1,9 @@
 import React from 'react'
-import {
-  Chart as ChartJS,
-  Tooltip,
-  PointElement,
-  Legend,
-  BarElement,
-  LineElement,
-  CategoryScale,
-  LinearScale,
-  Title,
-} from 'chart.js'
+import { Chart as ChartJS, registerables } from 'chart.js'
 import { useTheme } from '@mui/material'
 import { Chart } from 'react-chartjs-2'
 
-ChartJS.register(
-  CategoryScale,
-  LineElement,
-  LinearScale,
-  BarElement,
-  PointElement,
-  Title,
-  Tooltip,
-  Legend,
-)
+ChartJS.register(...registerables)
 
 export function LineChart() {
   const { palette } = useTheme()
