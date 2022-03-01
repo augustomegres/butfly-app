@@ -1,16 +1,13 @@
 import {
-  useTheme,
-  Box,
-  Chip,
-  Grid,
-  Typography
+  Box, Grid,
+  Typography, useTheme
 } from '@mui/material'
 import React from 'react'
-import { FaDollarSign } from 'react-icons/fa'
-import { TiArrowSortedDown, TiArrowSortedUp } from 'react-icons/ti'
-import { CalendarBar } from '../../components/CalendarBar'
+import { CalendarBar } from './components/Calendar'
 import { ContentCard } from '../../components/ContentCard'
-import { LineChart } from '../../components/LineChart'
+import { LineChart } from './components/MixedChart'
+import { EventCard } from './components/EventCard'
+import InfoCard from './components/InfoCard'
 export function Home(props: any) {
   const { palette } = useTheme()
   return (
@@ -32,43 +29,17 @@ export function Home(props: any) {
         {[1, 2, 3].map(() => (
           <Grid item xs={12} md={4}>
             <ContentCard p={4}>
-              <Typography fontWeight="light" fontSize="14px" color={palette.text.secondary}>
-                Ganhos totais (Jan/2022)
-              </Typography>
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <Typography fontSize={32} fontWeight="light" color={palette.text.primary}>
-                  R$ 1270,00
-                </Typography>
-                <Chip
-                  label="12%"
-                  sx={{ background: '#e8434320', color: '#e84343' }}
-                  icon={<TiArrowSortedDown color="#e84343" />}
-                />
-              </Box>
+              <InfoCard title={'Gastos mensais (Jan/2022)'} value={1400} compareValue={1300} isBetter={'greater'} />
             </ContentCard>
           </Grid>
         ))}
+
         <Grid item xs={12} md={4} sx={{ display: 'flex', maxHeight: 500 }}>
           <ContentCard p={4} sx={{ width: '100%', overflowY: 'scroll' }}>
-            <Typography fontWeight="light" fontSize="14px" color="lightgray">
-              Eventos recentes
-            </Typography>
-            {[1, 1, 3, 12, 32, 49, 75].map(a => (
-              <Box sx={{ display: 'flex', alignItems: 'center', p: 2 }}>
-                <FaDollarSign style={{ fontSize: 24, color: palette.secondary.main }} />
-                <Box>
-                  <Typography sx={{ ml: 2, fontSize: 16, fontWeight: 'normal', color: palette.text.primary }}>
-                    Nova venda registrada
-                  </Typography>
-
-                  <Typography sx={{ ml: 2, fontSize: 12, fontWeight: 'light', color: palette.text.secondary }}>
-                    {a} minutos atrás
-                  </Typography>
-                </Box>
-              </Box>
-            ))}
+            <EventCard events={[{ title: 'Nova venda registrada', description: 'Descrição', icon: 'Ícone', date: '2021-01-01' }]} />
           </ContentCard>
         </Grid>
+
         <Grid item xs={12} md={8} sx={{ display: 'flex', }}>
           <ContentCard p={4} sx={{ width: '100%', maxWidth: '100%' }} >
             <LineChart />

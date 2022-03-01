@@ -1,9 +1,8 @@
-import { Avatar, Hidden, IconButton, Typography } from '@mui/material'
+import { Avatar, IconButton, Typography, useMediaQuery } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
 import { IoLogOut } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
-import { useMediaQuery } from '@mui/material'
 
 export function User() {
   const isMobile = useMediaQuery('(max-width:600px)')

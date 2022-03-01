@@ -1,16 +1,14 @@
 import { Box, IconButton, useMediaQuery, useTheme } from '@mui/material'
 import { motion } from 'framer-motion'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { PageLogo } from './components/PageLogo'
+import { useState } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { IoLogOutOutline } from 'react-icons/io5'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { PageLogo } from './components/PageLogo'
 import { DesktopSidebar } from './DesktopSidebar'
 import { MobileNavbar } from './MobileNavbar'
-import { useContext, useState } from 'react'
-import { ThemeContext } from '../../themes/ThemeContext'
 
 export function Navbar(props: any) {
-  const { setTheme } = useContext(ThemeContext)
   const navigate = useNavigate()
   const isMobile = useMediaQuery('(max-width:600px)')
   const [isOpen, setIsOpen] = useState(false)
@@ -68,7 +66,7 @@ export function Navbar(props: any) {
             flex: 1,
           }}
         >
-          <Box style={{ maxWidth: '100%' }}>
+          <Box style={{ maxWidth: '100%', display: 'flex', flexDirection: 'column', height: '100%' }}>
             <Outlet />
           </Box>
         </Box>

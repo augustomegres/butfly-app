@@ -28,7 +28,7 @@ export function DesktopSidebar() {
       </Box>
 
       <Box sx={{ display: 'flex', flexDirection: 'column', p: 2 }}>
-        <Divider color="white" sx={{ opacity: 0.5, my: 2 }} />
+        <Divider color="white" sx={{ opacity: 0.2, my: 2 }} />
         <User />
       </Box>
     </motion.div >

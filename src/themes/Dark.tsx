@@ -2,6 +2,7 @@ import { createTheme } from '@mui/material/styles';
 import { buttons } from './overrides/button';
 import { inputs } from './overrides/input';
 import { list } from './overrides/list';
+import { table } from './overrides/table';
 
 const dark = createTheme({
   palette: {
@@ -18,7 +19,8 @@ const dark = createTheme({
   components: {
     ...inputs,
     ...buttons,
-    ...list
+    ...list,
+    ...table
   }
 });
 

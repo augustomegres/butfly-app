@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { Box, TextField, useMediaQuery } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 import { BoxProps } from '@mui/system'
 import React from 'react'
 

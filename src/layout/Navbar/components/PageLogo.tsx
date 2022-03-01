@@ -1,4 +1,4 @@
-import { Box, BoxProps, Typography, useMediaQuery } from '@mui/material'
+import { Box, BoxProps, Typography } from '@mui/material'
 import React from 'react'
 import { IoLogOutOutline } from 'react-icons/io5'
 

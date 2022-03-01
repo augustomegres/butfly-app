@@ -2,6 +2,7 @@ import createTheme from '@mui/material/styles/createTheme';
 import { buttons } from './overrides/button';
 import { inputs } from './overrides/input';
 import { list } from './overrides/list';
+import { table } from './overrides/table';
 
 const light = createTheme({
   palette: {
@@ -9,8 +10,7 @@ const light = createTheme({
     secondary: { main: '#f62681' },
     success: { main: '#0eccc9' },
     background: { default: '#f5f9ff', paper: '#ffffff' },
-    text: { primary: '#000', secondary: "#999" },
-
+    text: { primary: '#000', secondary: "#999" }
   },
   typography: {
     fontFamily: `"Lato", "Helvetica", "Arial", sans-serif`,
@@ -18,7 +18,8 @@ const light = createTheme({
   components: {
     ...inputs,
     ...buttons,
-    ...list
+    ...list,
+    ...table
   }
 });
 

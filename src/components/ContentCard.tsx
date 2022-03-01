@@ -9,12 +9,12 @@ export function ContentCard(props: BoxProps) {
     <Box
       {...props}
       sx={{
-        ...props.sx,
         borderRadius: 2,
         boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)',
         py: 4,
         px: isMobile ? 2 : 4,
-        background: theme.palette.background.paper
+        background: theme.palette.background.paper,
+        ...props.sx,
       }}
     >
       {props.children}
