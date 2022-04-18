@@ -1,19 +1,12 @@
-import {
-  Collapse,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  ListProps,
-  useMediaQuery,
-} from '@mui/material'
-import React, { useState } from 'react'
-import { MdExpandLess, MdExpandMore } from 'react-icons/md'
+import { Box, Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListProps, useMediaQuery } from '@mui/material'
+import { useState } from 'react'
+import { MdExpandLess, MdExpandMore, MdPointOfSale } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { BsBarChartFill, BsCartFill } from 'react-icons/bs'
-import { FaDollarSign } from 'react-icons/fa'
+import { BsBarChartFill } from 'react-icons/bs'
+import { FaDollarSign, FaPalette, FaShoppingCart, FaUser } from 'react-icons/fa'
 import { RiSettings2Fill } from 'react-icons/ri'
 import { GoPrimitiveDot } from 'react-icons/go'
+import { IoExtensionPuzzle } from 'react-icons/io5'
 
 interface NavListProps extends ListProps {
   theme: 'white' | 'dark'
@@ -27,30 +20,12 @@ const availableRoutes: {
   subItems?: { label: string; path: string }[]
 }[] = [
   { Icon: BsBarChartFill, label: 'Dashboard', path: '/', isCollapse: false },
-  {
-    Icon: BsCartFill,
-    label: 'Produtos',
-    path: '/produtos',
-    isCollapse: true,
-    subItems: [
-      { label: 'Compras', path: '/produtos/compras' },
-      { label: 'Estoque', path: '/produtos/estoque' },
-    ],
-  },
-  {
-    Icon: FaDollarSign,
-    label: 'Vendas',
-    path: '/vendas',
-    isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/vendas/listar' }],
-  },
-  {
-    Icon: RiSettings2Fill,
-    label: 'Serviços',
-    path: '/serviços',
-    isCollapse: true,
-    subItems: [{ label: 'Listar', path: '/serviços/listar' }],
-  },
+  { Icon: MdPointOfSale, label: 'Ponto de venda', path: '/ponto-de-venda', isCollapse: false },
+  { Icon: FaUser, label: 'Clientes', path: '/clientes', isCollapse: false },
+  { Icon: FaShoppingCart, label: 'Produtos', path: '/produtos', isCollapse: false },
+  { Icon: FaDollarSign, label: 'Vendas', path: '/vendas', isCollapse: false },
+  { Icon: IoExtensionPuzzle, label: 'Extensões', path: '/extensoes', isCollapse: false },
+  { Icon: FaPalette, label: 'Personalizar', path: '/personalizar', isCollapse: false }
 ]
 
 export function NavList(props: NavListProps) {
@@ -81,7 +56,7 @@ export function NavList(props: NavListProps) {
   return (
     <List component="nav" {...props}>
       {availableRoutes.map(({ label, Icon, subItems, path, isCollapse }, index) => (
-        <>
+        <Box key={index}>
           <ListItemButton
             key={index}
             onClick={() => handleCollapse(index, isCollapse, path)}
@@ -90,24 +65,19 @@ export function NavList(props: NavListProps) {
               justifyContent: isMobile ? 'center' : 'flex-start',
               mb: 1,
               transition: '.5s',
-              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
+              background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
             }}
           >
             <ListItemIcon
               sx={{
                 display: 'flex',
-                justifyContent: isMobile ? 'center' : 'flex-start',
+                justifyContent: isMobile ? 'center' : 'flex-start'
               }}
             >
               <Icon style={{ color: theme }} />
             </ListItemIcon>
             <ListItemText sx={{ color: theme }} primary={label} />
-            {isCollapse &&
-              (expandedIndex === index ? (
-                <MdExpandLess color={theme} />
-              ) : (
-                <MdExpandMore color={theme} />
-              ))}
+            {isCollapse && (expandedIndex === index ? <MdExpandLess color={theme} /> : <MdExpandMore color={theme} />)}
           </ListItemButton>
           <Collapse
             in={expandedIndex === index}
@@ -116,7 +86,7 @@ export function NavList(props: NavListProps) {
             sx={{
               mb: 1,
               borderRadius: 2,
-              transition: '.5s',
+              transition: '.5s'
             }}
           >
             <List component="div" disablePadding>
@@ -126,7 +96,7 @@ export function NavList(props: NavListProps) {
                   sx={{
                     display: 'flex',
                     justifyContent: isMobile ? 'center' : 'flex-start',
-                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : '',
+                    background: isSelected(path) ? 'rgba(0, 0, 0, 0.15)' : ''
                   }}
                   onClick={() => {
                     setSelectedPath(path)
@@ -137,7 +107,7 @@ export function NavList(props: NavListProps) {
                     sx={{
                       display: isMobile ? 'flex' : 'block',
                       justifyContent: 'center',
-                      pl: 2,
+                      pl: 2
                     }}
                   >
                     <GoPrimitiveDot style={{ color: theme }} />
@@ -147,7 +117,7 @@ export function NavList(props: NavListProps) {
               ))}
             </List>
           </Collapse>
-        </>
+        </Box>
       ))}
     </List>
   )

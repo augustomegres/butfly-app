@@ -1,9 +1,4 @@
-import {
-  Box,
-  BoxProps,
-  Chip, Typography, useTheme
-} from '@mui/material'
-import React from 'react'
+import { Box, BoxProps, Chip, Typography, useTheme } from '@mui/material'
 import { TiArrowSortedDown, TiArrowSortedUp, TiMinus } from 'react-icons/ti'
 import { currencyFormat } from '../../../utils/currencyFormat'
 
@@ -16,7 +11,7 @@ interface InfoCardProps extends BoxProps {
 const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }: InfoCardProps) => {
   const { palette } = useTheme()
   const getPercent = (value: number, compareValue: number) => {
-    let percent = (value - compareValue) / compareValue
+    const percent = (value - compareValue) / compareValue
     return percent
   }
 
@@ -32,7 +27,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.success.main}20`,
           foreground: palette.success.main,
-          icon: <TiArrowSortedUp color={palette.success.main} />
+          icon: <TiArrowSortedUp color={palette.success.main} />,
         }
       }
 
@@ -40,7 +35,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.error.main}20`,
           foreground: palette.error.main,
-          icon: <TiArrowSortedDown color={palette.error.main} />
+          icon: <TiArrowSortedDown color={palette.error.main} />,
         }
       }
     }
@@ -50,7 +45,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.success.main}20`,
           foreground: palette.success.main,
-          icon: <TiArrowSortedDown color={palette.success.main} />
+          icon: <TiArrowSortedDown color={palette.success.main} />,
         }
       }
 
@@ -58,7 +53,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
         colors = {
           background: `${palette.error.main}20`,
           foreground: palette.error.main,
-          icon: <TiArrowSortedUp color={palette.error.main} />
+          icon: <TiArrowSortedUp color={palette.error.main} />,
         }
       }
     }
@@ -67,7 +62,7 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
       colors = {
         background: '#dddddd20',
         foreground: '#dddddd',
-        icon: <TiMinus color="#dddddd" />
+        icon: <TiMinus color="#dddddd" />,
       }
     }
 
@@ -89,7 +84,8 @@ const InfoCard = ({ title, value, compareValue, isBetter = 'greater', ...rest }:
           icon={getColors()?.icon}
         />
       </Box>
-    </>)
+    </>
+  )
 }
 
 export default InfoCard

@@ -1,4 +1,4 @@
-import { Components } from "@mui/material";
+import { Components } from '@mui/material'
 
 export const table: Components = {
   MuiTableContainer: {
@@ -7,24 +7,24 @@ export const table: Components = {
         width: '100%',
         borderRadius: 10,
       },
-    }
+    },
   },
   MuiTableHead: {
     styleOverrides: {
       root: {
         '& th': {
-          fontWeight: 'bold'
+          fontWeight: 'bold',
         },
-      }
-    }
+      },
+    },
   },
   MuiTableBody: {
     styleOverrides: {
       root: {
         '& td': {
-          fontWeight: 'light'
+          fontWeight: 'light',
         },
       },
-    }
-  }
+    },
+  },
 }

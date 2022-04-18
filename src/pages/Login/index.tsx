@@ -17,13 +17,8 @@ export function Login() {
         padding={2}
       >
         <Box display="flex" flexDirection={'column'}>
-          <Typography
-            color={theme.palette.text.primary}
-            fontWeight="light"
-            textAlign="left"
-            sx={{ ml: 1, mb: 0, fontSize: 24, fontWeight: 'light' }}
-          >
-            Logue-se na Webstock
+          <Typography color={theme.palette.text.primary} fontWeight="light" textAlign="left" sx={{ ml: 1, mb: 0, fontSize: 24, fontWeight: 'light' }}>
+            Logue-se na Butfly
           </Typography>
           <Typography
             color={theme.palette.text.secondary}

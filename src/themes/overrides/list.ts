@@ -1,4 +1,4 @@
-import { Components } from "@mui/material";
+import { Components } from '@mui/material'
 
 export const list: Components = {
   MuiListItemButton: {
@@ -6,8 +6,8 @@ export const list: Components = {
       root: {
         height: 42,
         borderRadius: 10,
-        colorScheme: 'primary'
+        colorScheme: 'primary',
       },
-    }
-  }
+    },
+  },
 }

@@ -1,37 +1,33 @@
 import { LoadingButton } from '@mui/lab'
 import { IconButton, InputAdornment, TextField, Typography, useTheme } from '@mui/material'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { IoEyeOffOutline, IoEyeOutline } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { ApiInstance } from '../../../services/axios'
 
 export default function Form(props: any) {
   const navigate = useNavigate()
   const { register, handleSubmit } = useForm()
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLogged] = useState(false)
   const { palette } = useTheme()
   const submit = async (data: any) => {
-    setIsLogged(true)
     setIsLoading(true)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    navigate('/')
+    await ApiInstance.post('/login', { email: data.email, password: data.password })
+      .then(response => {
+        navigate('/')
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   return (
     <form onSubmit={handleSubmit(submit)} {...props}>
-      <TextField
-        id="email"
-        disabled={isLoading}
-        type="email"
-        label="Email"
-        fullWidth
-        required
-        sx={{ mt: 2 }}
-        {...register('email')}
-      />
+      <TextField id="email" disabled={isLoading} type="email" label="Email" fullWidth required sx={{ mt: 2 }} {...register('email')} />
 
       <TextField
         id="password"
@@ -53,14 +49,7 @@ export default function Form(props: any) {
         {...register('password')}
       />
 
-      <LoadingButton
-        fullWidth
-        color="primary"
-        variant="contained"
-        type="submit"
-        sx={{ mt: 2, position: 'relative' }}
-        loading={isLoading}
-      >
+      <LoadingButton fullWidth color="primary" variant="contained" type="submit" sx={{ mt: 2, position: 'relative' }} loading={isLoading}>
         Login
         {isLogged ? (
           <motion.div

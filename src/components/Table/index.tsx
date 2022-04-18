@@ -1,24 +1,36 @@
-import { useTheme } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import React, { useRef, useState } from 'react';
-import { useDebouncedCallback } from 'use-debounce';
-import { currencyFormat, dateFormat, dateTimeFormat } from './functions';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
+import React, { useRef, useState } from 'react'
+import { useDebouncedCallback } from 'use-debounce'
+import { currencyFormat, dateFormat, dateTimeFormat } from './functions'
+import { Row, Column } from './types'
 
-export default function TableComponent({ rows, columns, fetchMore }: { rows: Row[], columns: Column[], fetchMore?: () => Promise<void> }) {
+export function TableComponent({
+  rows,
+  columns,
+  fetchMore,
+  onClickRow
+}: {
+  rows: Row[]
+  columns: Column[]
+  fetchMore?: () => Promise<void>
+  actions?: {
+    [field: string]: {
+      icon: React.FC<any>
+      label: string
+      function: (rowData: string) => void
+    }
+  }
+  onClickRow: (rowData: { [field: string]: string | number }) => void
+}) {
   const { palette } = useTheme()
   const [fetchInProgress, setFetchInProgress] = useState(false)
   const ref: any = useRef()
 
-  const onScroll = useDebouncedCallback((event: any) => {
-    const target = event.target as HTMLTextAreaElement;
+  const onScroll = useDebouncedCallback(event => {
+    const target = event.target as HTMLTextAreaElement
     const maxScroll = target.scrollHeight - target.offsetHeight
     const currentScroll = target.scrollTop
-    if (!fetchInProgress && fetchMore && ((maxScroll - currentScroll) < 200)) {
+    if (!fetchInProgress && fetchMore && maxScroll - currentScroll < 1200) {
       setFetchInProgress(true)
       fetchMore()
         .then(() => setFetchInProgress(false))
@@ -26,7 +38,7 @@ export default function TableComponent({ rows, columns, fetchMore }: { rows: Row
     }
   }, 50)
 
-  const getValue = ({ value, type }: { value?: number | string, type: 'currency' | 'date' | 'datetime' | 'string' }) => {
+  const getValue = ({ value, type }: { value?: number | string; type: 'currency' | 'date' | 'datetime' | 'string' }) => {
     const map = {
       currency: (value?: string | number) => currencyFormat(value),
       date: (value?: string | number) => dateFormat(value),
@@ -39,26 +51,34 @@ export default function TableComponent({ rows, columns, fetchMore }: { rows: Row
 
   return (
     <TableContainer sx={{ height: '100%' }} onScroll={onScroll} ref={ref}>
-      <Table stickyHeader >
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
-            {columns.map(column => (
-              <TableCell sx={{ background: palette.background.paper }}>{column.label}</TableCell>
-            ))}
+            {columns.map((column, index) => {
+              if (column.hidden) return
+              return (
+                <TableCell key={index} sx={{ background: palette.background.paper }}>
+                  {column.label}
+                </TableCell>
+              )
+            })}
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row, index) => (
-            <TableRow key={index}>
-              {columns.map(column => (
-                <TableCell sx={{ color: palette.text.primary }}>
-                  {column.type ? getValue({ value: row[column.field], type: column.type }) : row[column.field]}
-                </TableCell>
-              ))}
+            <TableRow key={index} onClick={() => onClickRow(row)}>
+              {columns.map((column, index) => {
+                if (column.hidden) return
+                return (
+                  <TableCell key={index} sx={{ color: palette.text.primary }}>
+                    {column.type ? getValue({ value: row[column.field], type: column.type }) : row[column.field]}
+                  </TableCell>
+                )
+              })}
             </TableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer >
+    </TableContainer>
   )
 }

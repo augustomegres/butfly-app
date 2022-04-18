@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { format } from 'date-fns'
 
 const dateFormat = (value?: string | number) => {
   if (!value) return '-'

@@ -1,4 +1,4 @@
-import { Components } from "@mui/material";
+import { Components } from '@mui/material'
 
 export const buttons: Components = {
   MuiButton: {
@@ -6,8 +6,8 @@ export const buttons: Components = {
       root: {
         textTransform: 'none',
         borderRadius: 10,
-        height: 42
-      }
-    }
+        height: 42,
+      },
+    },
   },
 }

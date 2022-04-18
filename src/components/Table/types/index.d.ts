@@ -1,5 +1,5 @@
 interface Row {
-  [field: string]: string | number
+  [field: string]: any
 }
 
 interface Column {
@@ -7,4 +7,7 @@ interface Column {
   label: string
   type?: 'date' | 'datetime' | 'currency' | 'string'
   align?: 'left' | 'right' | 'center'
+  hidden?: boolean
 }
+
+export { Row, Column }

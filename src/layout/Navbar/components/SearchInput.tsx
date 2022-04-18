@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { Box, TextField } from '@mui/material'
 import { BoxProps } from '@mui/system'
-import React from 'react'
 
 interface SearchInputProps extends BoxProps {
   theme: 'dark' | 'white'
@@ -22,10 +21,7 @@ export function SearchInput(props: SearchInputProps) {
   })
 
   return (
-    <Box
-      sx={{ background: props.theme === 'white' ? '#00000026' : '', borderRadius: 2 }}
-      {...props}
-    >
+    <Box sx={{ background: props.theme === 'white' ? '#00000026' : '', borderRadius: 2 }} {...props}>
       <StyledTextField label="Pesquisar..." fullWidth>
         SearchInput
       </StyledTextField>

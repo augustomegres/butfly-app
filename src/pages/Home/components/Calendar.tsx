@@ -2,7 +2,6 @@ import { Box, Typography, useMediaQuery, useTheme } from '@mui/material'
 import { BoxProps } from '@mui/system'
 import { addDays, format } from 'date-fns'
 import ptBr from 'date-fns/locale/pt-BR'
-import React from 'react'
 
 export function CalendarBar(props: BoxProps) {
   const isMobile = useMediaQuery('(max-width:600px)')
@@ -10,10 +9,10 @@ export function CalendarBar(props: BoxProps) {
   const theme = useTheme()
   const getDates = (): Date[] => {
     const range = isMobile ? 2 : 6
-    const dateArr = []
+    const dateArr: Date[] = []
     dateArr.push(addDays(today, 0))
     for (let i = 1; i <= range; i++) {
-      dateArr.unshift(addDays(new Date(), (i * -1)))
+      dateArr.unshift(addDays(new Date(), i * -1))
       dateArr.push(addDays(new Date(), i))
     }
     return dateArr
@@ -21,29 +20,46 @@ export function CalendarBar(props: BoxProps) {
   return (
     <Box {...props} sx={{ display: 'flex', justifyContent: 'space-between', ...props.sx }}>
       {getDates().map((date, index) => {
-        let isToday = date.getDay() === new Date().getDay()
+        const isToday = date.getDay() === new Date().getDay()
         return (
           <Box
+            key={index}
             sx={{
               background: isToday ? 'rgba(232, 67, 67, .80)' : '#00000000',
               borderRadius: 4,
-              p: 2
+              p: 2,
             }}
           >
-            <Box key={index} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Box
+              key={index}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
               <Typography
-                sx={{ fontWeight: 'light', fontSize: '12px', textTransform: 'capitalize', color: isToday ? 'white' : theme.palette.text.secondary }}
+                sx={{
+                  fontWeight: 'light',
+                  fontSize: '12px',
+                  textTransform: 'capitalize',
+                  color: isToday ? 'white' : theme.palette.text.secondary,
+                }}
               >
                 {format(date, 'MMM', { locale: ptBr })}
               </Typography>
-              <Typography sx={{ fontSize: '20px', color: isToday ? 'white' : theme.palette.text.primary }}>
+              <Typography
+                sx={{
+                  fontSize: '20px',
+                  color: isToday ? 'white' : theme.palette.text.primary,
+                }}
+              >
                 {format(date, 'dd', { locale: ptBr })}
               </Typography>
             </Box>
           </Box>
         )
-      }
-      )}
+      })}
     </Box>
   )
 }

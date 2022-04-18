@@ -1,5 +1,4 @@
 import { Box, Hidden, Typography, useTheme } from '@mui/material'
-import React from 'react'
 
 export default function LeftContainer() {
   const theme = useTheme()
@@ -20,11 +19,7 @@ export default function LeftContainer() {
           <Typography fontSize={30} fontWeight="light" maxWidth="75%" mb={4} color={theme.palette.text.primary}>
             Olá, <br /> Seja bem vindo novamente
           </Typography>
-          <img
-            src="https://res.cloudinary.com/dch1p9yky/image/upload/v1644789567/startup_woman.svg"
-            alt="data"
-            style={{ width: '90%' }}
-          />
+          <img src="https://res.cloudinary.com/dch1p9yky/image/upload/v1644789567/startup_woman.svg" alt="data" style={{ width: '90%' }} />
         </Box>
       </Box>
     </Hidden>
