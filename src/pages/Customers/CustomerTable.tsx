@@ -66,6 +66,7 @@ export function CustomerTable() {
       fetchMoreResults={fetchData}
       filterResults={filterData}
       onRowClick={handleClickRow}
+      addFunction={() => navigate('/clientes/novo-cliente')}
     />
   )
 }

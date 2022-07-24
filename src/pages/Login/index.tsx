@@ -1,7 +1,6 @@
 import { Box, Typography, useTheme } from '@mui/material'
 import Form from './components/Form'
 import LeftContainer from './LeftContainer'
-
 export function Login() {
   const { palette } = useTheme()
 

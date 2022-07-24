@@ -1,18 +1,13 @@
 import { Button } from '@mui/material'
-import { useState } from 'react'
 import { HiPlusSm } from 'react-icons/hi'
+import { useNavigate } from 'react-router-dom'
 
-export function AddAction() {
-  const [isOpen, setIsOpen] = useState(false)
-  function onClose() {
-    setIsOpen(false)
-  }
-
+export function AddAction({ addFunction }: { addFunction: VoidFunction }) {
   return (
     <>
       <Button
         fullWidth
-        onClick={() => setIsOpen(true)}
+        onClick={() => addFunction()}
         color="primary"
         variant="contained"
         style={{ height: 46, boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.05)' }}

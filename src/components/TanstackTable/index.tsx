@@ -1,5 +1,5 @@
 import { Box, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
-import { ColumnDef, getCoreRowModel, getFilteredRowModel, getSortedRowModel, Table as TanstackTable, useTableInstance } from '@tanstack/react-table'
+import { ColumnDef, getCoreRowModel, getFilteredRowModel, Table as TanstackTable, useTableInstance } from '@tanstack/react-table'
 import { useEffect, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { AddAction } from './AddButton'
@@ -12,7 +12,8 @@ export function TableComponent({
   columns: _columns,
   fetchMoreResults: fetchMoreResults,
   filterResults: filterResults,
-  onRowClick: onRowClick
+  onRowClick: onRowClick,
+  addFunction: addFunction
 }: {
   table: TanstackTable<any>
   rows: any
@@ -20,6 +21,7 @@ export function TableComponent({
   fetchMoreResults: () => Promise<void>
   filterResults: (search: string) => void
   onRowClick?: (row: any) => void
+  addFunction: VoidFunction
 }) {
   useEffect(() => setData(_rows), [_rows])
   const [data, setData] = useState(() => [..._rows])
@@ -60,7 +62,7 @@ export function TableComponent({
             </Grid>
 
             <Grid item xs={2} md={2} lg={1}>
-              <AddAction />
+              <AddAction addFunction={() => addFunction()} />
             </Grid>
           </Grid>
         </Box>

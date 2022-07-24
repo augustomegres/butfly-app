@@ -29,7 +29,12 @@ export function NewProductDialog({ isOpen, onClose, onSuccess, ...props }: NewPr
   async function onSubmit(data: any) {
     const { name, price, category } = data
     setIsLoading(true)
-    await ApiInstance.post('/products', { name, price, category }, { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } })
+    const companyUid = localStorage.getItem('@Butfly:companyUid')
+    await ApiInstance.post(
+      `/companies/${companyUid}/products`,
+      { name, price, category },
+      { headers: { authorization: `Bearer ${localStorage.getItem('@Butfly:token')}` } }
+    )
       .then(response => {
         toast('Produto criado com sucesso', { type: 'success' })
         onClose()
