@@ -1,7 +1,7 @@
 import { createContext, Dispatch, SetStateAction, useState } from 'react'
 import { CustomerType } from '../../types/GlobalProps'
 
-export const CustomerContext = createContext<{ customer: CustomerType; setCustomer: Dispatch<SetStateAction<CustomerType>> }>({
+export const CustomerContext = createContext<{ customer: CustomerType; setCustomer: Dispatch<SetStateAction<any>> }>({
   customer: { addresses: [], createdAt: new Date(), observations: '', phones: [], name: '', email: '', surname: '', uid: '' },
   setCustomer: () => {}
 })

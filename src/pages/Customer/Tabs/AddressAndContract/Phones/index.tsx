@@ -29,9 +29,7 @@ export function Phones() {
         setIsCreating(false)
         reset()
       })
-      .catch(() => {
-        toast('Erro ao criar o telefone.', { type: 'error' })
-      })
+      .catch(() => toast('Erro ao criar o telefone.', { type: 'error' }))
   }
 
   const {
