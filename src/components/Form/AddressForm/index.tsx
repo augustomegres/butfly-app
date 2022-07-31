@@ -60,7 +60,7 @@ export function AddressForm() {
           <TextField
             {...register('address.street')}
             error={!!errors.address?.street}
-            helperText={errors.address?.street?.message}
+            helperText={String(errors.address?.street?.message)}
             onFocus={() => setFocusedInput('street')}
             onBlur={() => setFocusedInput('')}
             InputLabelProps={{ shrink: focusedInput === 'street' || watch('address.street') }}
@@ -75,7 +75,7 @@ export function AddressForm() {
             required
             {...register('address.number')}
             error={!!errors.address?.number}
-            helperText={errors.address?.number?.message}
+            helperText={String(errors.address?.number?.message)}
             onFocus={() => setFocusedInput('number')}
             onBlur={() => setFocusedInput('')}
             InputLabelProps={{ shrink: focusedInput === 'number' || watch('address.number') }}
@@ -89,7 +89,7 @@ export function AddressForm() {
           <TextField
             {...register('address.additionalInfo')}
             error={!!errors.address?.additionalInfo}
-            helperText={errors.address?.additionalInfo?.message}
+            helperText={String(errors.address?.additionalInfo?.message)}
             onFocus={() => setFocusedInput('additionalInfo')}
             onBlur={() => setFocusedInput('')}
             InputLabelProps={{ shrink: focusedInput === 'additionalInfo' || watch('address.additionalInfo') }}
@@ -102,7 +102,7 @@ export function AddressForm() {
           <TextField
             {...register('address.neighborhood')}
             error={!!errors.address?.neighborhood}
-            helperText={errors.address?.neighborhood?.message}
+            helperText={String(errors.address?.neighborhood?.message)}
             onFocus={() => setFocusedInput('neighborhood')}
             onBlur={() => setFocusedInput('')}
             InputLabelProps={{ shrink: focusedInput === 'neighborhood' || watch('address.neighborhood') }}
@@ -116,7 +116,7 @@ export function AddressForm() {
           <TextField
             {...register('address.city')}
             error={!!errors.address?.city}
-            helperText={errors.address?.city?.message}
+            helperText={String(errors.address?.city?.message)}
             onFocus={() => setFocusedInput('city')}
             onBlur={() => setFocusedInput('')}
             InputLabelProps={{ shrink: focusedInput === 'city' || watch('address.city') }}
@@ -136,7 +136,7 @@ export function AddressForm() {
                   required
                   select
                   error={!!errors.address?.uf}
-                  helperText={errors.address?.uf?.message}
+                  helperText={String(errors.address?.uf?.message)}
                   onFocus={() => setFocusedInput('uf')}
                   onBlur={() => setFocusedInput('')}
                   InputLabelProps={{ shrink: focusedInput === 'uf' || watch('address.uf') }}

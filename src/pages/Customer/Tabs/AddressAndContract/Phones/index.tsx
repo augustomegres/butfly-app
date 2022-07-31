@@ -94,7 +94,7 @@ export function Phones() {
             <Box display="flex" alignItems={'center'}>
               <PhoneInput
                 error={!!errors.phone}
-                helperText={errors.phone?.message}
+                helperText={String(errors.phone?.message)}
                 control={control}
                 name="phone"
                 label="Telefone"

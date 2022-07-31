@@ -1,5 +1,5 @@
 import { Box, Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, useTheme } from '@mui/material'
-import { ColumnDef, getCoreRowModel, getFilteredRowModel, Table as TanstackTable, useTableInstance } from '@tanstack/react-table'
+import { ColumnDef, flexRender, getCoreRowModel, getFilteredRowModel, Table as TanstackTable, useReactTable } from '@tanstack/react-table'
 import { useEffect, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 import { AddAction } from './AddButton'
@@ -17,7 +17,7 @@ export function TableComponent({
 }: {
   table: TanstackTable<any>
   rows: any
-  columns: ColumnDef<typeof _table.generics>[]
+  columns: ColumnDef<any>[]
   fetchMoreResults: () => Promise<void>
   filterResults: (search: string) => void
   onRowClick?: (row: any) => void
@@ -37,7 +37,7 @@ export function TableComponent({
     if (currentScroll > maxScroll - 1000) fetchMoreResults()
   }, 50)
 
-  const instance = useTableInstance(_table, {
+  const instance = useReactTable({
     data,
     columns,
     state: {
@@ -74,7 +74,7 @@ export function TableComponent({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => (
                   <TableCell sx={{ background: palette.background.paper }} key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : header.renderHeader()}
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableCell>
                 ))}
               </TableRow>
@@ -90,7 +90,7 @@ export function TableComponent({
                 }}
               >
                 {row.getVisibleCells().map(cell => (
-                  <TableCell key={cell.id}>{cell.renderCell()}</TableCell>
+                  <TableCell key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</TableCell>
                 ))}
               </TableRow>
             ))}

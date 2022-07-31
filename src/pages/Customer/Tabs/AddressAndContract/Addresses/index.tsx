@@ -9,7 +9,7 @@ import { NewAddressModal } from './NewAddressModal'
 export function Addresses() {
   const { palette } = useTheme()
   const { customer, setCustomer } = useContext(CustomerContext)
-  const [isOpen, setIsOpen] = useState(false)
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
   const [addressUid, setAddressUid] = useState('')
   const [editAddressModal, setEditAddressModal] = useState(false)
   const [newAddressModal, setNewAddressModal] = useState(false)
@@ -78,7 +78,7 @@ export function Addresses() {
                   color="error"
                   onClick={() => {
                     setAddressUid(address?.uid)
-                    setIsOpen(true)
+                    setDeleteModalIsOpen(true)
                   }}
                 >
                   <MdDelete />
@@ -100,7 +100,7 @@ export function Addresses() {
         </Button>
       </Box>
 
-      <DeleteAddressModal isOpen={isOpen} onClose={() => setIsOpen(false)} addressUid={addressUid} />
+      <DeleteAddressModal isOpen={deleteModalIsOpen} onClose={() => setDeleteModalIsOpen(false)} addressUid={addressUid} />
       <EditAddressModal
         customer={customer}
         addressUid={addressUid}

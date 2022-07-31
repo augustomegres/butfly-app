@@ -1,12 +1,16 @@
-import { useTheme } from '@mui/material'
-import { createTable } from '@tanstack/react-table'
-import { format } from 'date-fns'
+import { dateFormat, dateTimeFormat } from '@components/Table/functions'
+import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TableComponent } from '../../components/TanstackTable'
 import { ApiInstance } from '../../services/axios'
-import { CustomerMapper } from './Mapper/CustomerMapper'
 import { FormattedCustomers } from './Types/Customers'
+
+type Customer = {
+  name: string
+  surname: string
+  createdAt: number
+}
 
 export function CustomerTable() {
   const [customers, setCustomers] = useState<FormattedCustomers[]>([])
@@ -26,7 +30,7 @@ export function CustomerTable() {
       const newCustomers = response.data.rows
       setPage(response.data.page)
       setTotalPages(response.data.totalPages)
-      setCustomers([...customers, ...CustomerMapper(newCustomers)])
+      setCustomers([...customers, ...newCustomers])
     })
   }
 
@@ -44,19 +48,27 @@ export function CustomerTable() {
     setSearch(search)
   }
 
-  const table = createTable().setRowType<FormattedCustomers>()
-  const columns = [
-    table.createDataColumn('name', {
-      header: 'Nome'
+  const columnHelper = createColumnHelper<Customer>()
+  const columns: any = [
+    columnHelper.accessor('name', {
+      header: () => 'Nome',
+      cell: field => field.getValue()
     }),
-    table.createDataColumn('surname', {
-      header: 'Apelido'
+    columnHelper.accessor('surname', {
+      header: () => 'Apelido',
+      cell: field => field.getValue()
     }),
-    table.createDataColumn('createdAt', {
-      header: 'Cadastro',
-      cell: ({ row }) => <>{row.original?.createdAt ? format(row.original.createdAt, 'dd/MM/yyyy hh:mm:ss') : '-'}</>
+    columnHelper.accessor('createdAt', {
+      header: () => 'Criação',
+      cell: field => dateTimeFormat(field.getValue())
     })
   ]
+
+  const table = useReactTable<FormattedCustomers>({
+    data: customers,
+    columns,
+    getCoreRowModel: getCoreRowModel()
+  })
 
   return (
     <TableComponent

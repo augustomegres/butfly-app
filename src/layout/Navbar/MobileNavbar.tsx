@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from 'framer-motion'
 
 export function MobileNavbar({ setIsOpen }: { setIsOpen: (open: boolean) => void }) {
   return (
-    // @ts-expect-error
     <AnimatePresence exitBeforeEnter>
       <motion.div
         style={{

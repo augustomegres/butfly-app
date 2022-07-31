@@ -52,8 +52,8 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
     <form onSubmit={handleSubmit(submit)} {...props}>
       <TextField
         id="name"
-        error={errors['name']}
-        helperText={errors['name']?.message}
+        error={!!errors['name']}
+        helperText={String(errors['name']?.message)}
         disabled={isLoading}
         label="Nome"
         required
@@ -63,8 +63,8 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
 
       <TextField
         id="email"
-        error={errors['email']}
-        helperText={errors['email']?.message}
+        error={!!errors['email']}
+        helperText={String(errors['email']?.message)}
         disabled={isLoading}
         type="email"
         label="Email"
@@ -76,8 +76,8 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
 
       <TextField
         id="password"
-        error={errors['password']}
-        helperText={errors['password']?.message}
+        error={!!errors['password']}
+        helperText={String(errors['password']?.message)}
         disabled={isLoading}
         type={showPassword ? 'text' : 'password'}
         label="Senha"
@@ -98,8 +98,8 @@ export default function Form(props: FormHTMLAttributes<HTMLFormElement>) {
 
       <TextField
         id="confirm-password"
-        error={errors['confirmPassword']}
-        helperText={errors['confirmPassword']?.message}
+        error={!!errors['confirmPassword']}
+        helperText={String(errors['confirmPassword']?.message)}
         disabled={isLoading}
         type={showPassword ? 'text' : 'password'}
         label="Confirmação de senha"

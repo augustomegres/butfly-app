@@ -59,8 +59,8 @@ export function NewProductDialog({ isOpen, onClose, onSuccess, ...props }: NewPr
             <Grid item xs={12}>
               <TextField
                 sx={{ mt: '5px' }}
-                error={errors.name}
-                helperText={errors.name?.message}
+                error={!!errors.name}
+                helperText={String(errors.name?.message)}
                 fullWidth
                 label="Nome do produto"
                 {...register('name')}

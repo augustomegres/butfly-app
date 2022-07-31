@@ -47,8 +47,8 @@ export function EditAddressModal({
   async function handleUpdateAddress(address: AddressType) {
     const companyUid = localStorage.getItem('@Butfly:companyUid')
 
-    await ApiInstance.post(
-      `/companies/${companyUid}/customers/${customer?.uid}/addresses`,
+    await ApiInstance.put(
+      `/companies/${companyUid}/customers/${customer?.uid}/addresses/${addressUid}`,
       {
         zipCode: address.zipCode,
         city: address.city,
@@ -75,7 +75,7 @@ export function EditAddressModal({
           zipCode: response.data.zipCode,
           complement: response.data.complement
         }
-        setCustomer({ ...customer, addresses: [...customer.addresses, address] })
+        setCustomer({ ...customer, addresses: [...customer.addresses.filter(address => address.uid !== addressUid), address] })
       })
       .catch(error => {
         setIsLoading(false)

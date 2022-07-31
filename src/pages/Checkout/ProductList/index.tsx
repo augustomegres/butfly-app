@@ -33,7 +33,6 @@ export function ProductList(props: ProductListProps) {
         Produtos adicionados
       </Typography>
       <Box style={{ minHeight: 'calc(100% - 82px)', height: '300px', overflowY: 'auto' }}>
-        {/* @ts-expect-error */}
         <AnimatePresence initial={false}>
           {products.map((product, index) => (
             <motion.div key={index} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -100, height: 0 }}>

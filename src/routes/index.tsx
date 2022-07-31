@@ -14,6 +14,7 @@ import { InitialSetup } from '../pages/InitialSetup'
 import { AuthProvider } from '../contexts/AuthProvider'
 import { RequireAuth } from '../components/RequireAuth'
 import Customer from '../pages/Customer'
+import { NewProduct } from '@pages/NewProduct'
 
 export function Routes() {
   return (
@@ -37,6 +38,7 @@ export function Routes() {
           <Route path="/clientes/novo-cliente" element={<NewCustomer />} />
           <Route path="/produtos" element={<Products />} />
           <Route path="/produtos/:id" element={<Product />} />
+          <Route path="/produtos/novo-produto" element={<NewProduct />} />
           <Route path="/personalizar" element={<ThemeSelection />} />
         </Route>
         <Route path="*" element={<NotFound />} />
